@@ -1,0 +1,51 @@
+[app]
+video_source = "pexels"
+hide_config = false
+pexels_api_keys = [ "QCMcOBLbdvEwPT7YsIqIg1TLOqfs56xeb8p6cTJBmXabqdTNLfN0lMU8",]
+pixabay_api_keys = []
+llm_provider = "gemini"
+pollinations_api_key = ""
+pollinations_base_url = "https://pollinations.ai/api/v1"
+pollinations_model_name = "openai-fast"
+ollama_base_url = ""
+ollama_model_name = ""
+openai_api_key = ""
+openai_base_url = ""
+openai_model_name = "gpt-4o-mini"
+azure_api_key = ""
+azure_base_url = ""
+azure_model_name = "gpt-35-turbo"
+azure_api_version = "2024-02-15-preview"
+gemini_api_key = "AIzaSyAo44iiE3QmB4OiboGRLqtKKObWLrkQChQ"
+gemini_model_name = "gemini-2.5-flash"
+
+subtitle_provider = "edge"
+imagemagick_path = "C:\\Program Files\\ImageMagick-7.1.1-Q16\\magick.exe"
+ffmpeg_path = "C:\\ffmpeg\\ffmpeg-2025-05-29-git-75960ac270-full_build\\bin\\ffmpeg.exe"
+endpoint = ""
+material_directory = ""
+enable_redis = false
+redis_host = "localhost"
+redis_port = 6379
+redis_db = 0
+redis_password = ""
+max_concurrent_tasks = 5
+
+[whisper]
+model_size = "large-v3"
+device = "cpu"
+compute_type = "int8"
+
+[proxy]
+
+[azure]
+speech_key = ""
+speech_region = ""
+
+[ui]
+language = "vi"
+tts_server = "azure-tts-v1"
+voice_name = "vi-VN-NamMinhNeural-Male"
+font_name = "UTM Kabel KT.ttf"
+text_fore_color = "#ffee42"
+font_size = 80
