@@ -86,11 +86,11 @@ class VideoParams(BaseModel):
     font_size: int = 60
     stroke_color: Optional[str] = "#000000"
     stroke_width: float = 1.5
-    n_threads: Optional[int] = 2
+    n_threads: Optional[int] = 4
     subtitle_provider: Optional[str] = "edge"
     paragraph_number: Optional[int] = 1
-    gemini_key: str
-    openai_key: Optional[str] = str
+    gemini_key: Optional[str] = ""
+    openai_key: Optional[str] = ""
     speech_key: Optional[str] = ""
     speech_region: Optional[str] = ""
 
@@ -137,9 +137,9 @@ class VideoPodcastParams(BaseModel):
     subtitle_provider: Optional[str] = "edge"
     stroke_color: Optional[str] = "#000000"
     stroke_width: float = 1.5
-    n_threads: Optional[int] = 2
+    n_threads: Optional[int] = 4
     paragraph_number: Optional[int] = 1
-    gemini_key: str
+    gemini_key: Optional[str] = ""
     openai_key: Optional[str] = ""
 
 class SubtitleRequest(BaseModel):
