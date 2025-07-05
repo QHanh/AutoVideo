@@ -7,13 +7,12 @@ from typing import List
 from loguru import logger
 from openai import OpenAI
 from openai.types.chat import ChatCompletion
-
 from app.config import config
 
 _max_retries = 5
 
 
-def _generate_response(prompt: str) -> str:
+def _generate_response(prompt: str, gemini_key: str = None, openai_key: str = None) -> str:
     try:
         content = ""
         llm_provider = config.app.get("llm_provider", "openai")
@@ -22,7 +21,7 @@ def _generate_response(prompt: str) -> str:
         if llm_provider == "gemini":
             import google.generativeai as genai
 
-            api_key = config.app.get("gemini_api_key")
+            api_key = gemini_key
             model_name = config.app.get("gemini_model_name")
 
             if not api_key:
@@ -79,7 +78,7 @@ def _generate_response(prompt: str) -> str:
             content = generated_text
 
         elif llm_provider == "openai":
-            api_key = config.app.get("openai_api_key")
+            api_key = openai_key
             model_name = config.app.get("openai_model_name")
             base_url = config.app.get("openai_base_url", "")
             if not base_url:
@@ -126,7 +125,7 @@ def _generate_response(prompt: str) -> str:
 
 
 def generate_script(
-    video_subject: str, language: str = "", paragraph_number: int = 1
+    video_subject: str, language: str = "", paragraph_number: int = 1, gemini_key: str = None, openai_key: str = None
 ) -> str:
     prompt = f"""
 # Role: Video Script Generator
@@ -175,7 +174,7 @@ Generate a script for a video, depending on the subject of the video.
 
     for i in range(_max_retries):
         try:
-            response = _generate_response(prompt=prompt)
+            response = _generate_response(prompt=prompt, gemini_key=gemini_key, openai_key=openai_key)
             if response:
                 final_script = format_response(response)
             else:
@@ -199,7 +198,7 @@ Generate a script for a video, depending on the subject of the video.
     return final_script.strip()
 
 
-def generate_terms(video_subject: str, video_script: str, amount: int = 5) -> List[str]:
+def generate_terms(video_subject: str, video_script: str, amount: int = 5, gemini_key: str = None, openai_key: str = None) -> List[str]:
     prompt = f"""
 # Role: Video Search Terms Generator
 
@@ -232,7 +231,7 @@ Please note that you must use English for generating video search terms.
     response = ""
     for i in range(_max_retries):
         try:
-            response = _generate_response(prompt)
+            response = _generate_response(prompt=prompt, gemini_key=gemini_key, openai_key=openai_key)
             if "Error: " in response:
                 logger.error(f"Lỗi khi tạo kịch bản: {response}")
                 return response
@@ -267,6 +266,8 @@ def generate_podcast_script(
     video_content: str,
     language: str = "Vietnamese",
     max_retries: int = 3,
+    gemini_key: str = None,
+    openai_key: str = None
 ) -> str:
     """Biến content -> script podcast (an toàn JSON & text)."""
 
@@ -313,7 +314,7 @@ def generate_podcast_script(
 
     for i in range(max_retries):
         try:
-            response = _generate_response(prompt=prompt)
+            response = _generate_response(prompt=prompt, gemini_key=gemini_key, openai_key=openai_key)
             if response:
                 script_podcast = format_response(response)
             else:
@@ -341,7 +342,8 @@ def generate_podcast_dialogue(
     host1: str,
     host2: str,
     tone: str,
-    language: str = "Vietnamese"
+    language: str = "Vietnamese",
+    gemini_key: str = None
 ):
     """
     Gọi Gemini API theo JSON gốc từ node n8n.
@@ -438,7 +440,7 @@ def generate_podcast_dialogue(
 
     # === Gửi request ===
     params = {
-        "key": config.app.get("gemini_api_key")
+        "key": gemini_key
     }
 
     headers = {

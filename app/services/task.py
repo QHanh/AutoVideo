@@ -22,6 +22,8 @@ def generate_script(task_id, params):
             video_subject=params.video_subject,
             language=params.video_language,
             paragraph_number=params.paragraph_number,
+            gemini_key=params.gemini_key,
+            openai_key=params.openai_key
         )
     else:
         logger.debug(f"Kịch bản video đã có: \n{video_script}")
@@ -41,6 +43,8 @@ def generate_podcast_script(task_id, params):
             video_subject=params.video_subject,
             video_content=params.video_content,
             language=params.video_language,
+            gemini_key=params.gemini_key,
+            openai_key=params.openai_key
         )
     else:
         logger.debug(f"Kịch bản podcast đã có: \n{podcast_script}")
@@ -73,6 +77,8 @@ def generate_podcast_dialogue(task_id, params):
             host1=params.host1,
             host2=params.host2,
             tone=params.tone,
+            language=params.video_language,
+            gemini_key=params.gemini_key
         )
 
     # Kiểm tra kết quả trả về
@@ -103,7 +109,7 @@ def generate_terms(task_id, params, video_script):
     video_terms = params.video_terms
     if not video_terms:
         video_terms = llm.generate_terms(
-            video_subject=params.video_subject, video_script=video_script, amount=5
+            video_subject=params.video_subject, video_script=video_script, amount=5, gemini_key=params.gemini_key, openai_key=params.openai_key
         )
     else:
         if isinstance(video_terms, str):
