@@ -29,6 +29,8 @@ def generate_video_script(request: Request, body: VideoScriptRequest):
         video_subject=body.video_subject,
         language=body.video_language,
         paragraph_number=body.paragraph_number,
+        gemini_key=body.gemini_key,
+        openai_key=body.openai_key
     )
     response = {"video_script": video_script}
     return utils.get_response(200, response)
@@ -44,6 +46,8 @@ def generate_video_script_podcast(request: Request, body: VideoScriptPodcastRequ
         video_subject=body.video_subject,
         video_content=body.video_content,
         language=body.video_language,
+        gemini_key=body.gemini_key,
+        openai_key=body.openai_key
     )
     response = {"video_script_podcast": video_script_podcast}
     return utils.get_response(200, response)
@@ -61,6 +65,7 @@ def generate_video_dialogue(request: Request, body: VideoDialogueRequest):
         host2=body.host2,
         tone=body.tone,
         language=body.video_language,
+        gemini_key=body.gemini_key
     )
     response = {
         "video_dialogue_tts": video_dialogue["dialogue_tts"], 
@@ -78,6 +83,8 @@ def generate_video_terms(request: Request, body: VideoTermsRequest):
         video_subject=body.video_subject,
         video_script=body.video_script,
         amount=body.amount,
+        gemini_key=body.gemini_key,
+        openai_key=body.openai_key
     )
     response = {"video_terms": video_terms}
     return utils.get_response(200, response)

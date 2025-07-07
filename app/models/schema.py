@@ -186,6 +186,8 @@ class VideoScriptParams:
     video_subject: Optional[str] = ""
     video_language: Optional[str] = "Vietnamese"
     paragraph_number: Optional[int] = 1
+    gemini_key: Optional[str] = ""
+    openai_key: Optional[str] = ""
 
 class VideoScriptPodcastParams:
     """
@@ -198,6 +200,8 @@ class VideoScriptPodcastParams:
     video_subject: Optional[str] = ""
     video_content: Optional[str] = ""
     video_language: Optional[str] = "Vietnamese"
+    gemini_key: Optional[str] = ""
+    openai_key: Optional[str] = ""
 
 class VideoDialogueParams:
     """
@@ -207,8 +211,6 @@ class VideoDialogueParams:
       "video_script": "",
       "host1": "",
       "host2": "",
-      "voice1": "",
-      "voice2": "",
       "tone": "",
     }
     """
@@ -218,6 +220,7 @@ class VideoDialogueParams:
     host1: Optional[str] = "Thu"
     host2: Optional[str] = "Hanh"
     tone: Optional[str] = ""
+    gemini_key: Optional[str] = ""
 
 class VideoTermsParams:
     """
@@ -233,6 +236,8 @@ class VideoTermsParams:
         ""
     )
     amount: Optional[int] = 5
+    gemini_key: Optional[str] = ""
+    openai_key: Optional[str] = ""
 
 
 class BaseResponse(BaseModel):
